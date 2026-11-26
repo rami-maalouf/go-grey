@@ -48,8 +48,17 @@ async function refresh(custom, clearUnlisted = false) {
   );
 }
 
+function updateIcon(tabId, gray) {
+  const dir = gray ? "icons/grey/" : "icons/";
+  return api.action.setIcon({
+    tabId,
+    path: { 16: dir + "16.png", 32: dir + "32.png", 48: dir + "48.png" },
+  }).catch(() => {});
+}
+
 async function paintTab(tab, custom) {
   const current = await state(tab.id, tab.url, custom);
+  await updateIcon(tab.id, current.gray);
   await api.tabs
     .sendMessage(
       tab.id,
@@ -75,6 +84,7 @@ async function handle(msg, sender) {
   const { custom = [] } = await api.storage.local.get("custom");
   if (msg.type === "load") {
     const { gray } = await state(sender.tab?.id, sender.url, custom);
+    if (sender.tab && sender.frameId === 0) await updateIcon(sender.tab.id, gray);
     return { gray };
   }
   if (sender.url?.split("?")[0] === api.runtime.getURL("manage.html")) {
@@ -254,6 +264,7 @@ api.tabs.onUpdated.addListener((id, change, tab) => {
   ordered(async () => {
     const key = tabKey(id);
     const entry = (await api.storage.session.get(key))[key];
+    if (!hostnameOf(tab.url)) await updateIcon(id, false);
     if (!entry?.site?.includes("://")) return;
     if (!hostnameOf(tab.url) || new URL(tab.url).origin !== entry.site) {
       await api.storage.session.remove(key);

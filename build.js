@@ -15,10 +15,11 @@ for (const target of ["chrome", "firefox"]) {
   await cp("src", dir, { recursive: true });
   const manifest = {
     manifest_version: 3,
-    name: "Stillfeed",
-    version: "1.3.1",
+    name: "Go Grey",
+    version: "1.4.0",
     description:
       "Turn any chosen site grayscale, including videos. Start with Instagram, X, and LinkedIn, then add your own sites.",
+    homepage_url: "https://rami-maalouf.github.io/go-grey/",
     permissions: ["storage", "alarms", "scripting", "activeTab"],
     host_permissions: matches,
     optional_host_permissions: ["*://*/*"],
@@ -27,7 +28,7 @@ for (const target of ["chrome", "firefox"]) {
     action: {
       default_popup: "popup.html",
       default_icon: icons,
-      default_title: "Stillfeed",
+      default_title: "Go Grey",
     },
     content_scripts: [
       { matches, js: ["content.js"], run_at: "document_start" },
@@ -52,7 +53,7 @@ for (const target of ["chrome", "firefox"]) {
     dir + "/manifest.json",
     JSON.stringify(manifest, null, 2) + "\n",
   );
-  const archive = `stillfeed-${target}-${manifest.version}.zip`;
+  const archive = `go-grey-${target}-${manifest.version}.zip`;
   await rm("dist/" + archive, { force: true });
   await $`zip -Xqr ${"../" + archive} .`.cwd(dir);
 }
