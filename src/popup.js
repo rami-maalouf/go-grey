@@ -4,13 +4,18 @@ let tabId, current, timer;
 async function send(type, data = {}) {
   try {
     const state = await api.runtime.sendMessage({ type, tabId, ...data });
-    if (!state || state.error) throw Error();
+    if (!state || state.error)
+      throw Error(
+        typeof state?.error === "string"
+          ? state.error
+          : "Couldn’t update this tab. Try reopening Stillfeed.",
+      );
+    el("error").hidden = true;
     current = state;
     render();
-  } catch {
+  } catch (error) {
     el("error").hidden = false;
-    el("error").textContent =
-      "Couldn’t update this tab. Reopen Stillfeed to try again.";
+    el("error").textContent = error.message;
   }
 }
 function button(parent, title, action) {
@@ -21,12 +26,12 @@ function button(parent, title, action) {
   return node;
 }
 const modes = Object.entries({
-  auto: "Site setting",
+  auto: "Use site default",
   gray: "Grayscale",
-  color: "Color",
+  color: "Full color",
 }).map(([mode, title]) => [
   mode,
-  button("modes", title, () => send("mode", { mode, site: current.site })),
+  button("modes", title, () => send("mode", { mode, scope: current.scope })),
 ]);
 const switches = new Map();
 function updateSites(custom) {
@@ -64,16 +69,26 @@ el("resume").onclick = () => send("pause", { minutes: 0 });
 function render() {
   const { site, gray, mode, enabled, until } = current;
   clearTimeout(timer);
-  el("context").textContent = site ? site + " · This tab" : "This tab";
-  el("status").textContent = site
+  el("context").textContent = current.hostname
+    ? "This tab · " + current.hostname
+    : "This tab";
+  el("status").textContent = current.scope
     ? gray
       ? "Grayscale"
       : "Full color"
-    : "Outside your sites";
-  el("modes").hidden = !site || !!until;
-  modes.forEach(([value, node]) =>
-    node.setAttribute("aria-pressed", String(value === mode)),
-  );
+    : "Browser page";
+  el("modes").hidden = !current.scope;
+  el("hint").textContent = !current.scope
+    ? "Open Stillfeed on a website to change its colors."
+    : until
+      ? "Grayscale is paused. Resume below to change this tab."
+      : "Site default: " +
+        (site && enabled[site] !== false ? "grayscale" : "full color") +
+        ". Changes here apply only to this tab.";
+  modes.forEach(([value, node]) => {
+    node.disabled = Boolean(until);
+    node.setAttribute("aria-pressed", String(value === mode));
+  });
   updateSites(current.custom);
   switches.forEach((input, name) => {
     input.checked = enabled[name] !== false;

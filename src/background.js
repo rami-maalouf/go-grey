@@ -11,52 +11,70 @@ function ordered(work) {
   return result;
 }
 
-async function state(tabId, site) {
+function scopeFor(url, site) {
+  return site ?? (hostnameOf(url) ? new URL(url).origin : null);
+}
+
+async function state(tabId, url, custom) {
+  const site = siteFor(url, custom);
+  const scope = scopeFor(url, site);
   const { enabled = {}, until = 0 } = await api.storage.local.get([
     "enabled",
     "until",
   ]);
   const key = tabKey(tabId);
   const entry = (await api.storage.session.get(key))[key];
-  const mode = site && entry?.site === site ? entry.mode : "auto";
+  const mode = scope && entry?.site === scope ? entry.mode : "auto";
   const paused = until > Date.now();
   const gray = Boolean(
-    site &&
     !paused &&
-    (mode === "auto" ? enabled[site] !== false : mode === "gray"),
+    (mode === "auto" ? site && enabled[site] !== false : mode === "gray"),
   );
-  return { site, enabled, mode, until: paused ? until : 0, gray };
+  return { site, scope, enabled, mode, until: paused ? until : 0, gray };
 }
 
 async function refresh(custom, clearUnlisted = false) {
-  const tabs = await api.tabs.query(
-    clearUnlisted
-      ? {}
-      : {
-          url: [
-            ...sites.flatMap((s) => s.domains.map(originFor)),
-            ...custom.map(originFor),
-          ],
-        },
-  );
+  const overrides = await api.storage.session.get(null);
+  const tabs = await api.tabs.query({});
   await Promise.all(
-    tabs.map(async (tab) => {
-      const current = await state(tab.id, siteFor(tab.url, custom));
-      await api.tabs
-        .sendMessage(
-          tab.id,
-          { type: "paint", hostname: hostnameOf(tab.url), gray: current.gray },
-          { frameId: 0 },
-        )
-        .catch(() => {});
-    }),
+    tabs
+      .filter(
+        (tab) =>
+          clearUnlisted ||
+          overrides[tabKey(tab.id)] ||
+          siteFor(tab.url, custom),
+      )
+      .map((tab) => paintTab(tab, custom)),
   );
+}
+
+async function paintTab(tab, custom) {
+  const current = await state(tab.id, tab.url, custom);
+  await api.tabs
+    .sendMessage(
+      tab.id,
+      {
+        type: "paint",
+        hostname: hostnameOf(tab.url),
+        gray: current.gray,
+      },
+      { frameId: 0 },
+    )
+    .catch(() => {});
+}
+
+function attach(tabId) {
+  return api.scripting.executeScript({
+    target: { tabId },
+    files: ["content.js"],
+    injectImmediately: true,
+  });
 }
 
 async function handle(msg, sender) {
   const { custom = [] } = await api.storage.local.get("custom");
   if (msg.type === "load") {
-    const { gray } = await state(sender.tab?.id, siteFor(sender.url, custom));
+    const { gray } = await state(sender.tab?.id, sender.url, custom);
     return { gray };
   }
   if (sender.url?.split("?")[0] === api.runtime.getURL("manage.html")) {
@@ -66,7 +84,7 @@ async function handle(msg, sender) {
   const tab = await api.tabs.get(msg.tabId);
   const site = siteFor(tab.url, custom);
   const popupState = async () => ({
-    ...(await state(tab.id, site)),
+    ...(await state(tab.id, tab.url, custom)),
     custom,
     hostname: hostnameOf(tab.url),
   });
@@ -88,15 +106,24 @@ async function handle(msg, sender) {
     }
     case "mode": {
       if (
-        !site ||
-        site !== msg.site ||
+        !msg.scope ||
+        scopeFor(tab.url, site) !== msg.scope ||
         !["auto", "gray", "color"].includes(msg.mode)
       )
         return popupState();
       const key = tabKey(tab.id);
+      try {
+        await attach(tab.id);
+      } catch {
+        return { error: "Your browser blocked access to this page." };
+      }
       if (msg.mode === "auto") await api.storage.session.remove(key);
-      else await api.storage.session.set({ [key]: { site, mode: msg.mode } });
-      break;
+      else
+        await api.storage.session.set({
+          [key]: { site: msg.scope, mode: msg.mode },
+        });
+      await paintTab(tab, custom);
+      return popupState();
     }
     case "pause": {
       if (![0, 2, 5, 10].includes(msg.minutes)) return;
@@ -209,3 +236,18 @@ async function manage(msg, custom) {
 }
 api.permissions.onRemoved.addListener(() => ordered(syncCustom));
 api.runtime.onInstalled.addListener(() => ordered(syncCustom));
+
+// unlisted sites have a temporary tab grant and no registered content script.
+api.tabs.onUpdated.addListener((id, change, tab) => {
+  if (change.status !== "complete") return;
+  ordered(async () => {
+    const key = tabKey(id);
+    const entry = (await api.storage.session.get(key))[key];
+    if (!entry?.site?.includes("://")) return;
+    if (!hostnameOf(tab.url) || new URL(tab.url).origin !== entry.site) {
+      await api.storage.session.remove(key);
+      return;
+    }
+    await attach(id).catch(() => {});
+  });
+});

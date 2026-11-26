@@ -16,14 +16,14 @@
 }
 body {
   margin: 0;
-  width: 330px;
+  width: 480px;
   max-width: 100vw;
 }
 header {
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 18px 20px 14px;
+  padding: 20px 24px 16px;
 }
 h1 {
   font-size: 18px;
@@ -31,15 +31,15 @@ h1 {
   margin: 0;
 }
 main {
-  padding: 0 16px 16px;
+  padding: 0 clamp(16px, 5vw, 24px) 22px;
 }
 section {
-  margin-top: 16px;
+  margin-top: 22px;
 }
 #card {
   background: var(--card);
   border-radius: 12px;
-  padding: 16px;
+  padding: 20px;
   margin: 0;
 }
 #context {
@@ -62,7 +62,7 @@ h3 {
 #modes,
 #times {
   display: flex;
-  gap: 4px;
+  gap: 8px;
 }
 #modes {
   margin-top: 13px;
@@ -76,7 +76,7 @@ button {
   border-radius: 7px;
   background: var(--bg);
   color: var(--ink);
-  padding: 7px 6px;
+  padding: 10px 8px;
   flex: 1;
 }
 button[aria-pressed="true"] {
@@ -91,7 +91,7 @@ label {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 8px 1px;
+  padding: 10px 1px;
   border-bottom: 1px solid var(--line);
   cursor: pointer;
 }
@@ -152,14 +152,14 @@ input:checked:before {
   flex-shrink: 0;
 }
 .manager {
-  width: min(100%, 620px);
+  width: min(100%, 840px);
   margin: clamp(14px, 6vh, 64px) auto;
 }
 .manager header {
-  padding-inline: 24px;
+  padding-inline: clamp(16px, 4vw, 40px);
 }
 .manager main {
-  padding: 18px 24px;
+  padding: 18px clamp(16px, 4vw, 40px);
 }
 .manager h1 {
   font:
@@ -172,7 +172,7 @@ input:checked:before {
 }
 .manager form {
   background: var(--card);
-  padding: 18px;
+  padding: clamp(16px, 4vw, 28px);
   border-radius: 12px;
   margin-block: 24px;
 }
@@ -221,4 +221,35 @@ input:checked:before {
   padding: 9px 0;
   border-bottom: 1px solid var(--line);
   overflow-wrap: anywhere;
+}
+
+#hint {
+  color: var(--muted);
+  font-size: 12px;
+  margin: 12px 0 0;
+}
+#context {
+  overflow-wrap: anywhere;
+}
+.manager main > p {
+  max-width: 65ch;
+}
+button:disabled {
+  cursor: default;
+  opacity: 0.6;
+}
+@media (max-width: 360px) {
+  #card {
+    padding: 14px;
+  }
+  #modes,
+  #times {
+    gap: 4px;
+  }
+  .entry {
+    flex-wrap: wrap;
+  }
+  .entry button {
+    width: 100%;
+  }
 }

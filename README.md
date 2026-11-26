@@ -1,6 +1,6 @@
 # Stillfeed
 
-A desktop extension for viewing chosen websites in grayscale. Instagram, X (including twitter.com), and LinkedIn start enabled. In the popup, select **Manage sites**, enter a domain such as `youtube.com`, then select **Add site** and grant access if prompted. Custom domains cover HTTP, HTTPS, and their subdomains. Use Manage sites to remove a domain, or toggle its grayscale setting in the popup. Browser settings pages and extension stores restrict extensions. The popup can override the site preference for an individual tab. A timed pause takes priority over both settings.
+A desktop extension for viewing chosen websites in grayscale. Instagram, X (including twitter.com), and LinkedIn start enabled. In the popup, select **Manage sites**, enter a domain such as `youtube.com`, then select **Add site** and grant access if prompted. Custom domains cover HTTP, HTTPS, and their subdomains. Use Manage sites to remove a domain, or toggle its grayscale setting in the popup. Browser settings pages and extension stores restrict extensions. At the top of the popup, choose **Full color** or **Grayscale** for the current tab, including on an unlisted website. Choose **Use site default** to reset it. A timed pause takes priority over both settings.
 
 ## Build and try it
 
