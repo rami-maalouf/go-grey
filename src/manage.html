@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Manage sites · Stillfeed</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body class="manager">
+    <header>
+      <img src="icons/48.png" width="32" height="32" alt="" /><strong
+        >Stillfeed</strong
+      >
+    </header>
+    <main>
+      <h1>Manage sites</h1>
+      <p>
+        Instagram, X, and LinkedIn are included by default. Add any other
+        website to use the same grayscale controls there.
+      </p>
+      <form>
+        <label for="domain">Website address</label>
+        <div class="entry">
+          <input
+            id="domain"
+            type="text"
+            autocapitalize="none"
+            spellcheck="false"
+            placeholder="youtube.com"
+            required
+          /><button>Add site</button>
+        </div>
+        <small
+          >Includes subdomains. Your browser may ask for site access.</small
+        >
+      </form>
+      <p id="feedback" role="status"></p>
+      <h2>Added sites</h2>
+      <p id="empty">Your added sites will appear here.</p>
+      <ul id="custom"></ul>
+    </main>
+    <script src="sites.js"></script>
+    <script src="manage.js"></script>
+  </body>
+</html>

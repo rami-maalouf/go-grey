@@ -28,15 +28,36 @@ const modes = Object.entries({
   mode,
   button("modes", title, () => send("mode", { mode, site: current.site })),
 ]);
-const switches = sites.map(({ name }) => {
-  const label = document.createElement("label");
-  const input = document.createElement("input");
-  input.type = "checkbox";
-  input.onchange = () => send("site", { site: name, on: input.checked });
-  label.append(name, input);
-  el("sites").append(label);
-  return [name, input];
-});
+const switches = new Map();
+function updateSites(custom) {
+  const names = new Set([...sites.map((s) => s.name), ...custom]);
+  for (const [name, input] of switches) {
+    if (!names.has(name)) {
+      input.parentElement.remove();
+      switches.delete(name);
+    }
+  }
+  for (const name of names) {
+    if (switches.has(name)) continue;
+    const label = document.createElement("label");
+    const input = document.createElement("input");
+    input.type = "checkbox";
+    input.onchange = () => send("site", { site: name, on: input.checked });
+    label.append(name, input);
+    el("sites").append(label);
+    switches.set(name, input);
+  }
+}
+el("manage").onclick = () => {
+  const domain = current?.site
+    ? ""
+    : current?.hostname?.replace(/^www\./, "") || "";
+  api.tabs.create({
+    url:
+      api.runtime.getURL("manage.html") +
+      (domain ? "?domain=" + encodeURIComponent(domain) : ""),
+  });
+};
 for (const minutes of [2, 5, 10])
   button("times", minutes + " min", () => send("pause", { minutes }));
 el("resume").onclick = () => send("pause", { minutes: 0 });
@@ -53,7 +74,8 @@ function render() {
   modes.forEach(([value, node]) =>
     node.setAttribute("aria-pressed", String(value === mode)),
   );
-  switches.forEach(([name, input]) => {
+  updateSites(current.custom);
+  switches.forEach((input, name) => {
     input.checked = enabled[name] !== false;
   });
   el("pauseTitle").textContent = until

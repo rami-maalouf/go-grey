@@ -1,6 +1,7 @@
 (() => {
   const api = globalThis.browser ?? chrome;
-  const site = siteFor(location.href);
+  if (globalThis.stillfeedLoaded) return;
+  globalThis.stillfeedLoaded = true;
   const sheet = new CSSStyleSheet();
   sheet.replaceSync(
     ":root, :fullscreen, :modal, :popover-open { filter: grayscale(1) !important; }",
@@ -22,7 +23,10 @@
       .catch(() => {});
   }
   api.runtime.onMessage.addListener((msg) => {
-    if (msg.type === "paint" && msg.site === site) {
+    if (
+      msg.type === "paint" &&
+      (!msg.hostname || msg.hostname === location.hostname)
+    ) {
       revision++;
       paint(msg.gray);
     }

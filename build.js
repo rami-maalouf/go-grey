@@ -3,7 +3,7 @@ import { $ } from "bun";
 import vm from "node:vm";
 const matches = vm.runInNewContext(
   (await Bun.file("src/sites.js").text()) +
-    '\nsites.flatMap(site => site.domains.map(domain => "https://*." + domain + "/*"))',
+    "\nsites.flatMap(site => site.domains.map(originFor))",
 );
 const icons = Object.fromEntries(
   [16, 32, 48, 96, 128].map((size) => [size, "icons/" + size + ".png"]),
@@ -16,11 +16,13 @@ for (const target of ["chrome", "firefox"]) {
   const manifest = {
     manifest_version: 3,
     name: "Stillfeed",
-    version: "1.0.0",
+    version: "1.1.0",
     description:
-      "Turn Instagram, X, and LinkedIn grayscale, including videos. Pause for a few minutes or keep a single tab in color.",
-    permissions: ["storage", "alarms"],
+      "Turn any chosen site grayscale, including videos. Start with Instagram, X, and LinkedIn, then add your own sites.",
+    permissions: ["storage", "alarms", "scripting", "activeTab"],
     host_permissions: matches,
+    optional_host_permissions: ["*://*/*"],
+    options_ui: { page: "manage.html", open_in_tab: true },
     icons,
     action: {
       default_popup: "popup.html",
@@ -28,7 +30,7 @@ for (const target of ["chrome", "firefox"]) {
       default_title: "Stillfeed",
     },
     content_scripts: [
-      { matches, js: ["sites.js", "content.js"], run_at: "document_start" },
+      { matches, js: ["content.js"], run_at: "document_start" },
     ],
     ...(target === "chrome"
       ? {
@@ -50,7 +52,7 @@ for (const target of ["chrome", "firefox"]) {
     dir + "/manifest.json",
     JSON.stringify(manifest, null, 2) + "\n",
   );
-  const archive = "stillfeed-" + target + "-1.0.0.zip";
+  const archive = `stillfeed-${target}-${manifest.version}.zip`;
   await rm("dist/" + archive, { force: true });
   await $`zip -Xqr ${"../" + archive} .`.cwd(dir);
 }

@@ -125,3 +125,100 @@ input:checked:before {
 [hidden] {
   display: none !important;
 }
+.section-head,
+.entry,
+.manager li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.section-head h3 {
+  margin: 0;
+}
+.section-head button,
+.manager button {
+  flex: none;
+}
+#sites {
+  max-height: 180px;
+  overflow: auto;
+}
+#sites label {
+  gap: 12px;
+  overflow-wrap: anywhere;
+}
+#sites input {
+  flex-shrink: 0;
+}
+.manager {
+  width: min(100%, 620px);
+  margin: clamp(14px, 6vh, 64px) auto;
+}
+.manager header {
+  padding-inline: 24px;
+}
+.manager main {
+  padding: 18px 24px;
+}
+.manager h1 {
+  font:
+    500 36px Georgia,
+    serif;
+}
+.manager p,
+.manager small {
+  color: var(--muted);
+}
+.manager form {
+  background: var(--card);
+  padding: 18px;
+  border-radius: 12px;
+  margin-block: 24px;
+}
+.manager label {
+  font-weight: 600;
+  border: none;
+  padding: 0 0 7px;
+  cursor: default;
+}
+.manager input {
+  appearance: auto;
+  border: 1px solid var(--line);
+  background: var(--bg);
+  color: var(--ink);
+  font: inherit;
+  border-radius: 7px;
+  padding: 8px 10px;
+  width: 100%;
+  height: auto;
+  min-width: 0;
+  cursor: text;
+}
+.manager input:before {
+  display: none;
+}
+.manager button {
+  padding: 9px 14px;
+}
+.manager form button {
+  background: var(--ink);
+  color: var(--bg);
+}
+.manager small {
+  display: block;
+  margin-top: 8px;
+}
+.manager h2 {
+  font: 600 17px system-ui;
+  letter-spacing: 0;
+}
+.manager ul {
+  padding: 0;
+  list-style: none;
+}
+.manager li {
+  padding: 9px 0;
+  border-bottom: 1px solid var(--line);
+  overflow-wrap: anywhere;
+}
