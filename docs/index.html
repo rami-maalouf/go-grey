@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#191a18">
-  <meta name="description" content="Go Grey turns the sites you choose grayscale, videos included. Add any site in one click on Chrome, Firefox, or Zen.">
-  <title>Go Grey | Your web, in grey.</title>
+  <meta name="description" content="Scroll LinkedIn, X, and Instagram in grayscale, photos and videos included. Add TikTok or any other site from the Go Grey toolbar popup.">
+  <title>Go Grey | Your feed, in grey.</title>
   <link rel="icon" href="icon.png">
   <link rel="preload" as="font" type="font/woff2" href="type/instrument-serif.woff2" crossorigin>
   <link rel="stylesheet" href="style.css">
@@ -23,29 +23,51 @@
   <main id="main">
     <section class="wrap hero" aria-labelledby="hero-title">
       <div class="intro">
-        <h1 id="hero-title">Your web,<br><em>in grey.</em></h1>
-        <p>Turn the sites you choose grayscale, videos included. Get the color back whenever you want.</p>
+        <h1 id="hero-title">Your feed,<br><em>in grey.</em></h1>
+        <p>Scroll LinkedIn, X, and Instagram in grayscale, videos included. Add TikTok from the toolbar when you want it there, too.</p>
         <a class="cta" href="#install">Get the extension <span aria-hidden="true">↓</span></a>
         <small>For Chrome, Firefox &amp; Zen</small>
       </div>
-      <figure>
+      <figure aria-label="Interactive social feed comparison">
         <div class="viewer">
-          <div class="painting">
-            <img src="sunflowers.webp" width="1280" height="904" alt="Two golden sunflowers against a blue background, shown in color on the left and grayscale on the right.">
-            <img class="grey" src="sunflowers.webp" width="1280" height="904" alt="">
-            <span class="seam" aria-hidden="true"><span>‹<i></i>›</span></span>
-            <input id="comparison" type="range" min="0" max="100" value="46" aria-label="Color portion of the painting" aria-valuetext="46 percent in color">
+          <div class="feed-stage">
+            <div class="feed-heading"><div class="feed-bar" aria-hidden="true"><span class="network-mark">in</span><strong>Home feed</strong><span class="sample">Sample feed</span></div></div>
+            <div id="feed" tabindex="0" role="region" aria-label="Sample professional feed. Scroll to explore three posts.">
+              <div class="post-stack">
+                <article class="post">
+                  <header><span class="avatar fieldwork" aria-hidden="true">fw.</span><div><b>Fieldwork Studio</b><small>Independent design studio · 2h</small></div></header>
+                  <p>The posters are back from the printer. See you at Form Week!</p>
+                  <div class="poster" role="img" aria-label="Form Week event poster with blue lettering and concentric rings on a coral background">
+                    <span>Design &amp; print festival</span><strong>FORM<br>WEEK</strong><i></i>
+                  </div>
+                  <div class="engagement"><span>48 reactions</span><span>6 comments</span></div>
+                </article>
+                <article class="post">
+                  <header><span class="avatar editions" aria-hidden="true">N</span><div><b>Northline Editions</b><small>Independent publisher · 4h</small></div></header>
+                  <p>Three inks, one sheet. A first look at the cover proofs for our summer issue.</p>
+                  <div class="print-proof" role="img" aria-label="Cyan, yellow, and pink cover proofs for Northline's summer issue"><i>n.</i><i>n.</i><i>n.</i></div>
+                  <div class="engagement"><span>76 reactions</span><span>12 comments</span></div>
+                </article>
+                <article class="post">
+                  <header><span class="avatar museum" aria-hidden="true">A</span><div><b>Atelier Journal</b><small>Art &amp; culture magazine · 5h</small></div></header>
+                  <p>On the studio wall this week: the blue and ochre of Van Gogh’s <cite>Sunflowers</cite>.</p>
+                  <img class="post-art" src="sunflowers.webp" width="1280" height="904" alt="Two golden sunflowers against a blue background.">
+                  <div class="engagement"><span>92 reactions</span><span>8 comments</span></div>
+                </article>
+              </div>
+            </div>
+            <div class="seam" id="comparison" role="slider" tabindex="0" aria-label="Color portion of the feed" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" aria-valuetext="50 percent in color"><span aria-hidden="true">‹<i></i>›</span></div>
           </div>
-          <div class="legend"><span><i class="color-dot"></i>Full color</span><span><i class="grey-dot"></i>Go Grey</span></div>
+          <div class="legend"><span><i class="color-dot"></i>Full color</span><button id="motion" hidden>Play scroll</button><span><i class="grey-dot"></i>Go Grey</span></div>
         </div>
-        <figcaption><span>Drag to compare</span><a href="https://www.metmuseum.org/art/collection/search/436524"><cite>Sunflowers</cite>, Van Gogh <span aria-hidden="true">↗</span></a></figcaption>
+        <figcaption>Scroll the feed. Drag the line to compare.</figcaption>
       </figure>
     </section>
     <div class="paper">
       <section class="wrap controls" aria-labelledby="controls-title">
         <h2 id="controls-title">You pick what <em>goes grey.</em></h2>
         <div class="feature-list">
-          <div><h3>By website</h3><p>Instagram, X, and LinkedIn start in grey. Add YouTube or any other website from the popup in one click.</p></div>
+          <div><h3>By website</h3><p>LinkedIn, X, and Instagram start in grey. Add TikTok, YouTube, or any other website from the popup in one click.</p></div>
           <div><h3>By tab</h3><p>Keep one tab in full color while the rest follow your site settings. Or make a single tab grey.</p></div>
           <div><h3>By the minute</h3><p>Pause grayscale everywhere for 2, 5, or 10 minutes. It comes back on its own.</p></div>
         </div>
