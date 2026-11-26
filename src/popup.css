@@ -255,3 +255,11 @@ button:disabled {
     width: 100%;
   }
 }
+
+#addSite {
+  margin: 8px 0 4px;
+  width: 100%;
+  background: var(--ink);
+  color: var(--bg);
+  overflow-wrap: anywhere;
+}

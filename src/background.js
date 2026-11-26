@@ -91,6 +91,17 @@ async function handle(msg, sender) {
   switch (msg.type) {
     case "read":
       return popupState();
+    case "prepareAdd": {
+      const domain = hostnameOf(tab.url).replace(/^www\./, "");
+      if (!domain || site || domain !== msg.domain) return popupState();
+      // permission prompts can dismiss the toolbar popup before it can respond.
+      await api.storage.session.set({ ["add-" + domain]: Date.now() });
+      await finishAdd(domain);
+      return popupState();
+    }
+    case "cancelAdd":
+      await api.storage.session.remove("add-" + msg.domain);
+      return popupState();
     case "site": {
       if (
         (!custom.includes(msg.site) &&
@@ -251,3 +262,26 @@ api.tabs.onUpdated.addListener((id, change, tab) => {
     await attach(id).catch(() => {});
   });
 });
+
+async function finishAdd(domain) {
+  const key = "add-" + domain;
+  const timestamp = (await api.storage.session.get(key))[key];
+  if (!timestamp) return;
+  if (Date.now() - timestamp < 10 * 60_000) {
+    if (!(await api.permissions.contains({ origins: [originFor(domain)] })))
+      return;
+    const { custom = [] } = await api.storage.local.get("custom");
+    if (!siteFor("https://" + domain, custom))
+      await manage({ type: "add", domain }, custom);
+  }
+  await api.storage.session.remove(key);
+}
+
+api.permissions.onAdded.addListener(() =>
+  ordered(async () => {
+    const entries = await api.storage.session.get(null);
+    for (const key of Object.keys(entries)) {
+      if (key.startsWith("add-")) await finishAdd(key.slice(4));
+    }
+  }),
+);

@@ -16,7 +16,7 @@ for (const target of ["chrome", "firefox"]) {
   const manifest = {
     manifest_version: 3,
     name: "Stillfeed",
-    version: "1.2.1",
+    version: "1.3.0",
     description:
       "Turn any chosen site grayscale, including videos. Start with Instagram, X, and LinkedIn, then add your own sites.",
     permissions: ["storage", "alarms", "scripting", "activeTab"],

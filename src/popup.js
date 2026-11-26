@@ -53,6 +53,37 @@ function updateSites(custom) {
     switches.set(name, input);
   }
 }
+el("addSite").onclick = async () => {
+  const domain = current.hostname.replace(/^www\./, "");
+  el("addSite").disabled = true;
+  try {
+    // start both calls during the click so the browser receives the user gesture.
+    const pending = api.runtime.sendMessage({
+      type: "prepareAdd",
+      tabId,
+      domain,
+    });
+    const [result, allowed] = await Promise.all([
+      pending,
+      api.permissions.request({ origins: [originFor(domain)] }),
+    ]);
+    if (!allowed) {
+      await send("cancelAdd", { domain });
+      throw Error("Site access was declined. You can try again anytime.");
+    }
+    if (result?.error || !result)
+      throw Error("Couldn’t add this site. Try reopening Stillfeed.");
+    await send("read");
+  } catch (error) {
+    el("error").textContent = error.message;
+    el("error").hidden = false;
+  } finally {
+    el("addSite").disabled = false;
+  }
+};
+api.storage.onChanged.addListener((changes, area) => {
+  if (area === "local" && changes.custom && tabId != null) send("read");
+});
 el("manage").onclick = () => {
   const domain = current?.site
     ? ""
@@ -89,6 +120,8 @@ function render() {
     node.disabled = Boolean(until);
     node.setAttribute("aria-pressed", String(value === mode));
   });
+  el("addSite").hidden = !current.hostname || Boolean(site);
+  el("addSite").textContent = "Add " + current.hostname.replace(/^www\./, "");
   updateSites(current.custom);
   switches.forEach((input, name) => {
     input.checked = enabled[name] !== false;

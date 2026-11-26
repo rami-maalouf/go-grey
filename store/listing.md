@@ -8,7 +8,7 @@ Turn your chosen websites grayscale, including videos. Pause for a few minutes o
 
 Keep the feed. Turn down the color. Stillfeed displays Instagram, X, and LinkedIn in grayscale as you browse, including photos and videos playing on the page.
 
-Choose Manage sites to add YouTube, Reddit, a news site, or any other regular website by domain. Adding a site includes its subdomains and asks your browser for access. Remove a site at any time.
+On a website, click Add followed by its domain name in the toolbar popup. To type a different domain, choose Manage sites to add YouTube, Reddit, a news site, or any other regular website by domain. Adding a site includes its subdomains and asks your browser for access. Remove a site at any time.
 
 Open the toolbar popup to choose which sites use grayscale. Choose Full color or Grayscale for just the current tab. This also works on unlisted sites. Choose Use site default to reset the tab. Pause all your sites for 2, 5, or 10 minutes and Stillfeed resumes automatically. You can also resume early.
 
