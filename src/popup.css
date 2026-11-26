@@ -14,10 +14,12 @@
 * {
   box-sizing: border-box;
 }
+/* the toolbar host measures the document before assigning its viewport. */
+.toolbar-popup {
+  width: 520px;
+}
 body {
   margin: 0;
-  width: 480px;
-  max-width: 100vw;
 }
 header {
   display: flex;
