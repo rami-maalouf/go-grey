@@ -16,7 +16,7 @@ for (const target of ["chrome", "firefox"]) {
   const manifest = {
     manifest_version: 3,
     name: "Go Grey",
-    version: "1.4.0",
+    version: "1.4.1",
     description:
       "Turn any chosen site grayscale, including videos. Start with Instagram, X, and LinkedIn, then add your own sites.",
     homepage_url: "https://rami-maalouf.github.io/go-grey/",

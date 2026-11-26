@@ -14,9 +14,10 @@
 * {
   box-sizing: border-box;
 }
-/* the toolbar host measures the document before assigning its viewport. */
+/* request a wide toolbar popup and fit the extensions menu when it sets the width. */
 .toolbar-popup {
   width: 520px;
+  max-width: 100%;
 }
 body {
   margin: 0;
