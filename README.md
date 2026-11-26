@@ -1,15 +1,28 @@
-# Stillfeed
+# Go Grey
 
-A desktop extension for viewing chosen websites in grayscale. Instagram, X (including twitter.com), and LinkedIn start enabled. On an unlisted website, select **Add [domain]** in the popup to enable grayscale there. To enter a different domain, select **Manage sites**, enter a domain such as `youtube.com`, then select **Add site** and grant access if prompted. Custom domains cover HTTP, HTTPS, and their subdomains. Use Manage sites to remove a domain, or toggle its grayscale setting in the popup. Browser settings pages and extension stores restrict extensions. At the top of the popup, switch **Grayscale this tab** on or off, including on an unlisted website. Choose **Use site default** to reset it. A timed pause takes priority over both settings.
+Turn the websites you choose grayscale, including their photos and in-page videos. Instagram, X (including twitter.com), and LinkedIn start enabled. Add YouTube or any other regular website from the toolbar. Everything runs locally.
+
+[Website](https://rami-maalouf.github.io/go-grey/) · [Release downloads](https://github.com/rami-maalouf/go-grey/releases) · [Privacy](https://rami-maalouf.github.io/go-grey/privacy.html)
+
+## Using Go Grey
+
+Open the toolbar popup and click **Add [domain]** to add the website you're visiting. Grant site access if the browser asks. **Manage sites** lets you type a different address or remove an added site. Domains include their subdomains. With the site list in the popup, you can change a site's default across open tabs.
+
+**Grayscale this tab** lets you keep one tab in color while the rest of that site stays gray. It also lets you turn a single tab gray on an unlisted site. **Use site default** clears that choice. **Pause all sites** restores color everywhere for 2, 5, or 10 minutes. Choose **Resume grayscale** to end a pause early.
+
+The browser applies a CSS filter to the document, including in-page video and fullscreen content. There is no frame-by-frame processing, DOM scanning, or polling. Separate picture-in-picture windows, external players, and browser-protected pages are outside the page filter.
 
 ## Build and try it
 
-Run `bun build.js` in this directory. The build copies readable JavaScript, CSS, HTML, and icons directly into the browser-specific packages under `dist/`. It requires Bun and the zip CLI.
+From the repository root, run `bun build.js` with Bun and the `zip` command installed. No dependency installation is necessary. The build generates the two browser manifests, copies the readable HTML, CSS, JavaScript, and icons into separate directories, then creates one ZIP per browser.
 
-In Chrome, visit `chrome://extensions`, enable Developer mode, select Load unpacked, and choose `dist/chrome`. In Firefox or Zen, visit `about:debugging#/runtime/this-firefox`, choose Load Temporary Add-on, and select `dist/firefox/manifest.json`. Reload supported pages already open at installation.
+| Browser | Local installation |
+| --- | --- |
+| Chrome 123+ | Open `chrome://extensions`, enable **Developer mode**, select **Load unpacked**, and choose `dist/chrome/`. |
+| Firefox 142+ or compatible Zen | Open `about:debugging#/runtime/this-firefox`, choose **Load Temporary Add-on**, and select `dist/firefox/manifest.json`. The temporary installation ends when you restart the browser. |
 
-The content script applies a CSS grayscale filter to the document and top-layer elements. It requires no DOM scanning, playback hooks, or continuous JavaScript. The browser still incurs rendering costs for the filter. Separate picture-in-picture windows and external players are outside the page filter.
+For a release ZIP, extract it first and use the extracted folder in place of the build directory above. An ordinary persistent Firefox or Zen installation requires a Mozilla-signed build. Reload any site that was already open during installation.
 
-## Submission
+## Store submission
 
-Upload the corresponding ZIP from `dist/` to the Chrome Web Store developer dashboard or Firefox Add-on Developer Hub. The Firefox build is unsigned until Mozilla signs it. Use the description, permission explanations, and reviewer instructions in `store/listing.md`, the screenshot and promotional tile in `store/`, and the 128-pixel icon in `src/icons/`. Privacy text for your publisher website is in `store/privacy.md`. Select desktop distribution. Complete account-specific publisher details and certifications in each dashboard.
+The build produces `dist/go-grey-chrome-1.4.0.zip` and `dist/go-grey-firefox-1.4.0.zip`. Both have their browser-specific `manifest.json` at the archive root. The submission kit includes listing copy, URLs, permission explanations, review steps, and image filenames. [Store submission kit](store/listing.md)
