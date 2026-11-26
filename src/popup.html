@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Stillfeed</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <header>
+      <img src="icons/48.png" width="32" height="32" alt="" />
+      <h1>Stillfeed</h1>
+    </header>
+    <main>
+      <section id="card">
+        <p id="context">Current tab</p>
+        <h2 id="status" role="status">Loading…</h2>
+        <div
+          id="modes"
+          role="group"
+          aria-label="Display for this tab"
+          hidden
+        ></div>
+      </section>
+      <section>
+        <h3>Grayscale sites</h3>
+        <div id="sites"></div>
+      </section>
+      <section>
+        <h3 id="pauseTitle">Pause all sites</h3>
+        <div id="times" role="group" aria-labelledby="pauseTitle"></div>
+        <button id="resume" hidden>Resume grayscale</button>
+      </section>
+      <p id="error" role="alert" hidden></p>
+    </main>
+    <script src="sites.js"></script>
+    <script src="popup.js"></script>
+  </body>
+</html>
