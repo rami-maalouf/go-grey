@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#191a18">
+  <meta name="description" content="Go Grey turns the sites you choose grayscale, videos included. Add any site in one click on Chrome, Firefox, or Zen.">
+  <title>Go Grey | Your web, in grey.</title>
+  <link rel="icon" href="icon.png">
+  <link rel="preload" as="font" type="font/woff2" href="type/instrument-serif.woff2" crossorigin>
+  <link rel="stylesheet" href="style.css">
+  <script src="demo.js" defer></script>
+</head>
+<body id="top">
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="wrap nav">
+    <a class="brand" href="#top"><img src="icon.png" width="38" height="38" alt="">Go Grey</a>
+    <nav aria-label="Main navigation">
+      <a class="studio" href="https://orbitlabs.studio/">Orbit Labs <span aria-hidden="true">↗</span></a>
+      <a class="nav-action" href="#install">Get Go Grey <span aria-hidden="true">↓</span></a>
+    </nav>
+  </header>
+  <main id="main">
+    <section class="wrap hero" aria-labelledby="hero-title">
+      <div class="intro">
+        <h1 id="hero-title">Your web,<br><em>in grey.</em></h1>
+        <p>Turn the sites you choose grayscale, videos included. Get the color back whenever you want.</p>
+        <a class="cta" href="#install">Get the extension <span aria-hidden="true">↓</span></a>
+        <small>For Chrome, Firefox &amp; Zen</small>
+      </div>
+      <figure>
+        <div class="viewer">
+          <div class="painting">
+            <img src="sunflowers.webp" width="1280" height="904" alt="Two golden sunflowers against a blue background, shown in color on the left and grayscale on the right.">
+            <img class="grey" src="sunflowers.webp" width="1280" height="904" alt="">
+            <span class="seam" aria-hidden="true"><span>‹<i></i>›</span></span>
+            <input id="comparison" type="range" min="0" max="100" value="46" aria-label="Color portion of the painting" aria-valuetext="46 percent in color">
+          </div>
+          <div class="legend"><span><i class="color-dot"></i>Full color</span><span><i class="grey-dot"></i>Go Grey</span></div>
+        </div>
+        <figcaption><span>Drag to compare</span><a href="https://www.metmuseum.org/art/collection/search/436524"><cite>Sunflowers</cite>, Van Gogh <span aria-hidden="true">↗</span></a></figcaption>
+      </figure>
+    </section>
+    <div class="paper">
+      <section class="wrap controls" aria-labelledby="controls-title">
+        <h2 id="controls-title">You pick what <em>goes grey.</em></h2>
+        <div class="feature-list">
+          <div><h3>By website</h3><p>Instagram, X, and LinkedIn start in grey. Add YouTube or any other website from the popup in one click.</p></div>
+          <div><h3>By tab</h3><p>Keep one tab in full color while the rest follow your site settings. Or make a single tab grey.</p></div>
+          <div><h3>By the minute</h3><p>Pause grayscale everywhere for 2, 5, or 10 minutes. It comes back on its own.</p></div>
+        </div>
+      </section>
+      <section class="wrap install" id="install" aria-labelledby="install-title">
+        <div><h2 id="install-title">Get Go Grey<span>.</span></h2><p>Download a desktop build from GitHub and follow the steps for your browser.</p></div>
+        <div class="download">
+          <a class="cta" href="https://github.com/rami-maalouf/go-grey/releases">Download builds <span aria-hidden="true">↗</span></a>
+          <details><summary>Chrome installation</summary><p>Unzip the Chrome download. Open <code>chrome://extensions</code>, turn on <strong>Developer mode</strong>, then choose <strong>Load unpacked</strong> and select the unzipped folder.</p></details>
+          <details><summary>Firefox &amp; Zen installation</summary><p>Unzip the Firefox download. Open <code>about:debugging#/runtime/this-firefox</code>, choose <strong>Load Temporary Add-on</strong>, and select <code>manifest.json</code> in the folder. This build stays installed until you restart your browser.</p></details>
+        </div>
+      </section>
+    </div>
+  </main>
+  <footer class="wrap"><a href="https://orbitlabs.studio/">An Orbit Labs project <span aria-hidden="true">↗</span></a><div><a href="privacy.html">Privacy</a><a href="https://github.com/rami-maalouf/go-grey">GitHub <span aria-hidden="true">↗</span></a></div></footer>
+</body>
+</html>
