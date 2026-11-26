@@ -14,6 +14,7 @@ async function send(type, data = {}) {
     current = state;
     render();
   } catch (error) {
+    if (current) render();
     el("error").hidden = false;
     el("error").textContent = error.message;
   }
@@ -25,14 +26,16 @@ function button(parent, title, action) {
   el(parent).append(node);
   return node;
 }
-const modes = Object.entries({
-  auto: "Use site default",
-  gray: "Grayscale",
-  color: "Full color",
-}).map(([mode, title]) => [
-  mode,
-  button("modes", title, () => send("mode", { mode, scope: current.scope })),
-]);
+const tabGray = el("tabGray");
+tabGray.onchange = async () => {
+  const mode = tabGray.checked ? "gray" : "color";
+  tabGray.disabled = true;
+  await send("mode", { mode, scope: current.scope });
+};
+el("resetTab").onclick = async () => {
+  await send("mode", { mode: "auto", scope: current.scope });
+  tabGray.focus();
+};
 const switches = new Map();
 function updateSites(custom) {
   const names = new Set([...sites.map((s) => s.name), ...custom]);
@@ -100,26 +103,15 @@ el("resume").onclick = () => send("pause", { minutes: 0 });
 function render() {
   const { site, gray, mode, enabled, until } = current;
   clearTimeout(timer);
-  el("context").textContent = current.hostname
-    ? "This tab · " + current.hostname
-    : "This tab";
-  el("status").textContent = current.scope
-    ? gray
-      ? "Grayscale"
-      : "Full color"
-    : "Browser page";
-  el("modes").hidden = !current.scope;
-  el("hint").textContent = !current.scope
-    ? "Open Stillfeed on a website to change its colors."
-    : until
-      ? "Grayscale is paused. Resume below to change this tab."
-      : "Site default: " +
-        (site && enabled[site] !== false ? "grayscale" : "full color") +
-        ". Changes here apply only to this tab.";
-  modes.forEach(([value, node]) => {
-    node.disabled = Boolean(until);
-    node.setAttribute("aria-pressed", String(value === mode));
-  });
+  el("tabRow").hidden = !current.scope;
+  el("context").textContent = current.hostname;
+  tabGray.checked = gray;
+  tabGray.disabled = Boolean(until);
+  el("resetTab").hidden = !current.scope || mode === "auto" || Boolean(until);
+  el("tabNotice").hidden = Boolean(current.scope && !until);
+  el("tabNotice").textContent = !current.scope
+    ? "Open a website to change its colors."
+    : "Grayscale is paused.";
   el("addSite").hidden = !current.hostname || Boolean(site);
   el("addSite").textContent = "Add " + current.hostname.replace(/^www\./, "");
   updateSites(current.custom);

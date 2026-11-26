@@ -10,7 +10,7 @@ Keep the feed. Turn down the color. Stillfeed displays Instagram, X, and LinkedI
 
 On a website, click Add followed by its domain name in the toolbar popup. To type a different domain, choose Manage sites to add YouTube, Reddit, a news site, or any other regular website by domain. Adding a site includes its subdomains and asks your browser for access. Remove a site at any time.
 
-Open the toolbar popup to choose which sites use grayscale. Choose Full color or Grayscale for just the current tab. This also works on unlisted sites. Choose Use site default to reset the tab. Pause all your sites for 2, 5, or 10 minutes and Stillfeed resumes automatically. You can also resume early.
+Open the toolbar popup to choose which sites use grayscale. Switch Grayscale this tab on or off. This also works on unlisted sites. Choose Use site default to reset the tab. Pause all your sites for 2, 5, or 10 minutes and Stillfeed resumes automatically. You can also resume early.
 
 Site preferences stay in your browser. Stillfeed runs locally and collects no data.
 
@@ -24,6 +24,6 @@ Storage saves site preferences and the pause deadline locally and keeps tab over
 
 ## Reviewer steps
 
-Open a supported site after installation (reload an already-open feed). Play an inline video. Open a second tab on the same site, then choose Full color in the first tab. Compare the two tabs. Choose Use site default to reset. Pause for two minutes, check both tabs, then leave them open through expiry. An unrelated site keeps its original colors.
+Open a supported site after installation (reload an already-open feed). Play an inline video. Open a second tab on the same site, then switch off Grayscale this tab in the first tab. Compare the two tabs. Choose Use site default to reset. Pause for two minutes, check both tabs, then leave them open through expiry. An unrelated site keeps its original colors.
 
-Open Manage sites, add youtube.com, and accept the domain permission. Open a YouTube video and compare Grayscale and Full color in the tab controls. Remove youtube.com to restore its original appearance.
+Open Manage sites, add youtube.com, and accept the domain permission. Open a YouTube video and toggle Grayscale this tab to compare the two views. Remove youtube.com to restore its original appearance.

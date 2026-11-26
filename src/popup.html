@@ -13,15 +13,20 @@
     </header>
     <main>
       <section id="card">
-        <p id="context">Current tab</p>
-        <h2 id="status" role="status">Loading…</h2>
-        <div
-          id="modes"
-          role="group"
-          aria-label="Display for this tab"
-          hidden
-        ></div>
-        <p id="hint"></p>
+        <label id="tabRow" for="tabGray" hidden>
+          <span
+            ><strong>Grayscale this tab</strong><span id="context"></span
+          ></span>
+          <input
+            id="tabGray"
+            type="checkbox"
+            role="switch"
+            aria-label="Grayscale this tab"
+            aria-describedby="context"
+          />
+        </label>
+        <button id="resetTab" type="button" hidden>Use site default</button>
+        <p id="tabNotice" role="status">Loading…</p>
       </section>
       <section>
         <div class="section-head">
