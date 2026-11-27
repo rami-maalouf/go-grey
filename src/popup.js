@@ -8,7 +8,7 @@ async function send(type, data = {}) {
       throw Error(
         typeof state?.error === "string"
           ? state.error
-          : "Couldn’t update this tab. Try reopening Go Grey.",
+          : "Couldn’t update this tab. Try reopening Go Gray.",
       );
     el("error").hidden = true;
     current = state;
@@ -75,7 +75,7 @@ el("addSite").onclick = async () => {
       throw Error("Site access was declined. You can try again anytime.");
     }
     if (result?.error || !result)
-      throw Error("Couldn’t add this site. Try reopening Go Grey.");
+      throw Error("Couldn’t add this site. Try reopening Go Gray.");
     await send("read");
   } catch (error) {
     el("error").textContent = error.message;

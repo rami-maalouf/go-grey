@@ -15,8 +15,8 @@ for (const target of ["chrome", "firefox"]) {
   await cp("src", dir, { recursive: true });
   const manifest = {
     manifest_version: 3,
-    name: "Go Grey",
-    version: "1.4.4",
+    name: "Go Gray",
+    version: "1.4.5",
     description:
       "Turn any chosen site grayscale, including videos. Start with Instagram, X, and LinkedIn, then add your own sites.",
     homepage_url: "https://rami-maalouf.github.io/go-grey/",
@@ -28,7 +28,7 @@ for (const target of ["chrome", "firefox"]) {
     action: {
       default_popup: "popup.html",
       default_icon: icons,
-      default_title: "Go Grey",
+      default_title: "Go Gray",
     },
     content_scripts: [
       { matches, js: ["content.js"], run_at: "document_start" },
@@ -53,7 +53,7 @@ for (const target of ["chrome", "firefox"]) {
     dir + "/manifest.json",
     JSON.stringify(manifest, null, 2) + "\n",
   );
-  const archive = `go-grey-${target}-${manifest.version}.zip`;
+  const archive = `go-gray-${target}-${manifest.version}.zip`;
   await rm("dist/" + archive, { force: true });
   await $`zip -Xqr ${"../" + archive} .`.cwd(dir);
 }

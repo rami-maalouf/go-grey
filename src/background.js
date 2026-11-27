@@ -49,7 +49,7 @@ async function refresh(custom, clearUnlisted = false) {
 }
 
 function updateIcon(tabId, gray) {
-  const dir = gray ? "icons/grey/" : "icons/";
+  const dir = gray ? "icons/gray/" : "icons/";
   return api.action.setIcon({
     tabId,
     path: { 16: dir + "16.png", 32: dir + "32.png", 48: dir + "48.png" },

@@ -1,10 +1,10 @@
-# Go Grey
+# Go Gray
 
 Turn the websites you choose grayscale, including their photos and in-page videos. Instagram, X (including twitter.com), and LinkedIn start enabled. Add YouTube or any other regular website from the toolbar. Everything runs locally.
 
 [Website](https://rami-maalouf.github.io/go-grey/) · [Release downloads](https://github.com/rami-maalouf/go-grey/releases) · [Privacy](https://rami-maalouf.github.io/go-grey/privacy.html)
 
-## Using Go Grey
+## Using Go Gray
 
 Open the toolbar popup and click **Add [domain]** to add the website you're visiting. Grant site access if the browser asks. **Manage sites** lets you type a different address or remove an added site. Domains include their subdomains. With the site list in the popup, you can change a site's default across open tabs.
 
@@ -25,4 +25,4 @@ For a release ZIP, extract it first and use the extracted folder in place of the
 
 ## Store submission
 
-The build produces `dist/go-grey-chrome-1.4.4.zip` and `dist/go-grey-firefox-1.4.4.zip`. Both have their browser-specific `manifest.json` at the archive root. The submission kit includes listing copy, URLs, permission explanations, review steps, and image filenames. [Store submission kit](store/listing.md)
+The build produces `dist/go-gray-chrome-1.4.5.zip` and `dist/go-gray-firefox-1.4.5.zip`. Both have their browser-specific `manifest.json` at the archive root. The submission kit includes listing copy, URLs, permission explanations, review steps, and image filenames. [Store submission kit](store/listing.md)

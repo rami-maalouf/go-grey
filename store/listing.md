@@ -1,4 +1,4 @@
-# Go Grey
+# Go Gray
 
 ## Short description
 
@@ -6,19 +6,19 @@ Turn chosen websites grayscale, including videos. Keep one tab in color or pause
 
 ## Store description
 
-Go Grey turns Instagram, X, and LinkedIn grayscale when you visit them. Photos, posts, and videos playing on the page all lose their color together.
+Go Gray turns Instagram, X, and LinkedIn grayscale when you visit them. Photos, posts, and videos playing on the page all lose their color together.
 
-To add YouTube, Reddit, or another website, open Go Grey and click Add next to the domain name. You can also type an address in Manage sites. A site setting covers its subdomains and takes effect across open tabs.
+To add YouTube, Reddit, or another website, open Go Gray and click Add next to the domain name. You can also type an address in Manage sites. A site setting covers its subdomains and takes effect across open tabs.
 
 Need color to edit a photo or read a chart? Switch off Grayscale this tab. Other tabs keep their own settings. The same switch can turn a single tab gray on a site you usually keep in color. Choose Use site default to reset the tab.
 
-Pause all sites for 2, 5, or 10 minutes. Color returns immediately and grayscale resumes when the timer ends. Your selections stay in the browser. Go Grey has no account, analytics, or external services.
+Pause all sites for 2, 5, or 10 minutes. Color returns immediately and grayscale resumes when the timer ends. Your selections stay in the browser. Go Gray has no account, analytics, or external services.
 
 ## Listing fields
 
 | Field | Value |
 | --- | --- |
-| Product | Go Grey |
+| Product | Go Gray |
 | Language and platform | English, desktop |
 | Chrome category | Workflow & Planning |
 | Firefox category | Appearance |

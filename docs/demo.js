@@ -3,7 +3,7 @@ const stage = slider.closest(".feed-stage");
 // both copies share one grid cell and one native scroll position.
 for (const layer of stage.querySelectorAll(".feed-bar, .post-stack")) {
   const gray = layer.cloneNode(true);
-  gray.classList.add("grey-copy");
+  gray.classList.add("gray-copy");
   gray.setAttribute("aria-hidden", "true");
   gray.inert = true;
   layer.after(gray);
