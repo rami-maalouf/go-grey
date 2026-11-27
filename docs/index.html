@@ -30,8 +30,15 @@
         <div class="viewer">
           <div class="feed-stage">
             <div class="feed-heading"><div class="feed-bar" aria-hidden="true"><span class="network-mark">in</span><strong>Home feed</strong><span class="sample">Sample feed</span></div></div>
-            <div id="feed" tabindex="0" role="region" aria-label="Sample professional feed. Scroll to explore three posts.">
+            <div id="feed" tabindex="0" role="region" aria-label="Sample professional feed. Scroll to read more posts.">
+              <div class="seam" id="comparison" role="slider" tabindex="0" aria-label="Color portion of the feed" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" aria-valuetext="50 percent in color"><span aria-hidden="true">‹<i></i>›</span></div>
               <div class="post-stack">
+                <article class="post">
+                  <header><span class="avatar maya" aria-hidden="true">MC</span><div><b>Maya Chen</b><small>Landscape designer · 38m</small></div></header>
+                  <p>On a site visit, I always walk the path in both directions. You’d miss this patch of light coming the other way.</p>
+                  <img class="feed-photo" src="forest.webp" width="880" height="586" alt="Afternoon light falling across a winding forest path.">
+                  <div class="engagement"><span>32 reactions</span><span>4 comments</span></div>
+                </article>
                 <article class="post">
                   <header><span class="avatar fieldwork" aria-hidden="true">fw.</span><div><b>Fieldwork Studio</b><small>Independent design studio · 2h</small></div></header>
                   <p>The posters are back from the printer. See you at Form Week!</p>
@@ -39,6 +46,12 @@
                     <span>Design &amp; print festival</span><strong>FORM<br>WEEK</strong><i></i>
                   </div>
                   <div class="engagement"><span>48 reactions</span><span>6 comments</span></div>
+                </article>
+                <article class="post">
+                  <header><span class="avatar city" aria-hidden="true">JR</span><div><b>Jules Reed</b><small>Architect · 3h</small></div></header>
+                  <p>From street level these towers look like three different heights. Look at the reflections and you can see where the glass steps back.</p>
+                  <img class="feed-photo" src="architecture.webp" width="880" height="586" loading="lazy" alt="Glass towers seen from below on an overcast day.">
+                  <div class="engagement"><span>57 reactions</span><span>8 comments</span></div>
                 </article>
                 <article class="post">
                   <header><span class="avatar editions" aria-hidden="true">N</span><div><b>Northline Editions</b><small>Independent publisher · 4h</small></div></header>
@@ -54,11 +67,11 @@
                 </article>
               </div>
             </div>
-            <div class="seam" id="comparison" role="slider" tabindex="0" aria-label="Color portion of the feed" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" aria-valuetext="50 percent in color"><span aria-hidden="true">‹<i></i>›</span></div>
+
           </div>
-          <div class="legend"><span><i class="color-dot"></i>Full color</span><button id="motion" hidden>Play scroll</button><span><i class="grey-dot"></i>Go Grey</span></div>
+          <div class="legend"><span><i class="color-dot"></i>Full color</span><span><i class="grey-dot"></i>Go Grey</span></div>
         </div>
-        <figcaption>Scroll the feed. Drag the line to compare.</figcaption>
+        <figcaption>Scroll through the posts. Drag the handle to compare.</figcaption>
       </figure>
     </section>
     <div class="paper">
