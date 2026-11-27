@@ -25,4 +25,4 @@ For a release ZIP, extract it first and use the extracted folder in place of the
 
 ## Store submission
 
-The build produces `dist/go-grey-chrome-1.4.1.zip` and `dist/go-grey-firefox-1.4.1.zip`. Both have their browser-specific `manifest.json` at the archive root. The submission kit includes listing copy, URLs, permission explanations, review steps, and image filenames. [Store submission kit](store/listing.md)
+The build produces `dist/go-grey-chrome-1.4.2.zip` and `dist/go-grey-firefox-1.4.2.zip`. Both have their browser-specific `manifest.json` at the archive root. The submission kit includes listing copy, URLs, permission explanations, review steps, and image filenames. [Store submission kit](store/listing.md)
