@@ -1,10 +1,10 @@
 :root {
-  color-scheme: light dark;
-  --bg: light-dark(#faf9f6, #20211e);
-  --ink: light-dark(#21241f, #f3f2eb);
-  --muted: light-dark(#595e55, #c1c5b9);
-  --line: light-dark(#d4d6cd, #494d43);
-  --card: light-dark(#e9ece3, #30362a);
+  color-scheme: dark;
+  --bg: #202123;
+  --ink: #f3f2ed;
+  --muted: #c1c3c1;
+  --line: #505256;
+  --card: #303236;
   font:
     14px/1.4 system-ui,
     sans-serif;
