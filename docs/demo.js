@@ -37,3 +37,36 @@ slider.addEventListener("keydown", (event) => {
   event.preventDefault();
   setSplit(values[event.key]);
 });
+
+// demonstrate the divider once when the feed first comes into view.
+const motion = matchMedia("(prefers-reduced-motion: reduce)");
+if (!motion.matches) {
+  let hint;
+  const observer = new IntersectionObserver(([entry]) => {
+    if (entry.intersectionRatio < 0.5) return;
+    observer.disconnect();
+    hint = stage.animate(
+      [50, 65, 42, 50].map(value => ({
+        "--split": value + "%",
+        easing: "ease-in-out",
+      })),
+      { duration: 1450, delay: 280 },
+    );
+  }, { threshold: 0.5 });
+
+  function takeControl() {
+    observer.disconnect();
+    if (hint && hint.playState !== "finished") {
+      const position = parseFloat(getComputedStyle(stage).getPropertyValue("--split"));
+      hint.cancel();
+      setSplit(position);
+    }
+    hint = null;
+  }
+
+  for (const event of ["pointerdown", "focusin", "wheel", "keydown"]) {
+    stage.addEventListener(event, takeControl, { capture: true, passive: true, once: true });
+  }
+  motion.addEventListener("change", takeControl, { once: true });
+  observer.observe(stage);
+}
